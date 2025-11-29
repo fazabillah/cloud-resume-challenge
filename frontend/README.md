@@ -1,6 +1,7 @@
 # Frontend Technical Specification
 
 - Create a static website that serves an HTML resume.
+- Read  [React+Vite Guide](./REACT_VITE_GUIDE.md) to understand how React + Vite works on my project structure
 
 ## Resume Format Generation
 
