@@ -1,7 +1,7 @@
 # Frontend Technical Specification
 
 - Create a static website that serves an HTML resume.
-- Read  [React+Vite Guide](./REACT_VITE_GUIDE.md) to understand how React + Vite works on my project structure
+- Read [React+Vite Guide](./REACT_VITE_GUIDE.md) to understand how React + Vite works on my project structure
 
 ## Resume Format Generation
 
@@ -56,3 +56,13 @@ http-server
 
 ## Update HTML to React Vite
 - Use AI assistance to transform HTML and CSS file created previously to work in React Vite style.
+
+## API ViewCounter
+
+A Python FastAPI backend that tracks resume page views with persistent storage.
+
+### Features
+- RESTful API with three endpoints (get, increment, reset)
+- JSON-based persistence for local development
+- CORS-enabled for React frontend integration
+- Designed for serverless migration (AWS Lambda + DynamoDB)

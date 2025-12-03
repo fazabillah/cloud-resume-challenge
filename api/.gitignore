@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+
+# Counter data (development state)
+counter.json
+
+# IDE
+.vscode/
+.idea/

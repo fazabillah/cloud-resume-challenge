@@ -12,15 +12,15 @@ export const personalInfo = {
 // About section content
 export const aboutContent = {
   title: "About",
-  lead: "Aspiring DevOps/Cloud Engineer with 9+ years of project engineering experience transitioning to cloud infrastructure and DevOps practices. Experience in process automation, system optimization, and cross-functional team coordination. Currently completing Cloud Resume Challenge Bootcamp (AWS & Azure) and DevOps program. Seeking to leverage project management background, technical problem-solving skills, and hands-on cloud/DevOps training to deliver scalable, automated infrastructure solutions."
+  lead: "I started my career managing energy infrastructure projects where downtime cost millions. I learned to obsess over uptime, coordinate distributed teams, and automation. Somewhere between building system tools and transforming manual processes, I realized something: I wasn't just managing infrastructure, I was engineering reliability. And I wanted to do more of it. So I made the shift to cloud engineering. Now I work with AWS, Azure, Terraform, and Kubernetes to build the same resilient, automated systems I used to manage; except now they scale globally, deploy in minutes, and don't require physical offshore platforms. Currently building multi-cloud serverless architectures, writing IaC modules, and exploring how AI can improve operational efficiency. Always learning, always automating, and still allergic to manual deployments."
 }
 
 // Resume section navigation
 export const resumeNavigation = [
   { href: '#about', label: 'About' },
   { href: '#skills', label: 'Technical Skills' },
+  { href: '#certifications', label: 'Certifications' },
   { href: '#projects', label: 'Project Portfolio' },
   { href: '#experience', label: 'Work Experience' },
-  { href: '#certifications', label: 'Certifications' },
   { href: '#education', label: 'Education' }
 ]

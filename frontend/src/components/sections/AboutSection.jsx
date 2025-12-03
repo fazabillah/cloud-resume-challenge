@@ -1,4 +1,5 @@
 import SocialIcons from '../SocialIcons'
+import ViewCounter from '../ViewCounter'
 
 function AboutSection({ personalInfo, aboutContent }) {
   return (
@@ -13,6 +14,7 @@ function AboutSection({ personalInfo, aboutContent }) {
       </div>
       <p className="lead mb-5">{aboutContent.lead}</p>
       <SocialIcons />
+      <ViewCounter />
     </div>
   )
 }

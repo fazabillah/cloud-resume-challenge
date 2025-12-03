@@ -3,19 +3,19 @@
     {
       "name": "Cloud Resume Challenge Bootcamp",
       "issuer": "ExamPro.Co",
-      "icon": "fas fa-graduation-cap",
+      "icon": "fas fa-certificate text-warning",
       "expectedDate": "Dec 2025"
     },
     {
-      "name": "Azure Developer Associate (AZ-204)",
-      "issuer": "Microsoft",
+      "name": "DevOps Zero to Hero",
+      "issuer": "Self Pace Learning",
       "icon": "fas fa-certificate text-warning",
       "expectedDate": null
       
     },
     {
-      "name": "Terraform Associate (004)",
-      "issuer": "HashiCorp",
+      "name": "Cloud Security Engineer",
+      "issuer": "TryHackMe",
       "icon": "fas fa-certificate text-warning",
       "expectedDate": null
     }

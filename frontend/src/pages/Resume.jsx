@@ -43,6 +43,15 @@ function Resume() {
         </section>
         <hr className="m-0" />
 
+        {/* Certifications */}
+        <section className="resume-section" id="certifications">
+          <div className="resume-section-content">
+            <h2 className="mb-5">Certifications & Training</h2>
+            <CertificationList certifications={certificationsData} />
+          </div>
+        </section>
+        <hr className="m-0" />
+
         {/* Project Portfolio */}
         <section className="resume-section" id="projects">
           <div className="resume-section-content">
@@ -63,15 +72,6 @@ function Resume() {
             {experienceData.positions.map(position => (
               <ExperienceCard key={position.id} position={position} />
             ))}
-          </div>
-        </section>
-        <hr className="m-0" />
-
-        {/* Certifications */}
-        <section className="resume-section" id="certifications">
-          <div className="resume-section-content">
-            <h2 className="mb-5">Certifications & Training</h2>
-            <CertificationList certifications={certificationsData} />
           </div>
         </section>
         <hr className="m-0" />
