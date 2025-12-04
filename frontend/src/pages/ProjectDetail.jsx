@@ -1,18 +1,15 @@
-import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import projectsData from '../data/projectsData.json'
 import BackButton from '../components/common/BackButton'
+import NotFoundSection from '../components/common/NotFoundSection'
+import useBodyClass from '../hooks/useBodyClass'
 
 function ProjectDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    document.body.classList.remove('has-sidebar')
-    return () => {
-      // Cleanup on unmount if needed
-    }
-  }, [])
+  // Remove 'has-sidebar' class for full-width layout
+  useBodyClass('has-sidebar', false)
 
   // Find project by id from all categories
   const project = projectsData.categories
@@ -21,15 +18,12 @@ function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="container-fluid p-0">
-        <section className="resume-section">
-          <div className="resume-section-content">
-            <BackButton onClick={() => navigate('/projects')} label="← Back to Projects" />
-            <h1>Project Not Found</h1>
-            <p>The project you're looking for doesn't exist.</p>
-          </div>
-        </section>
-      </div>
+      <NotFoundSection
+        onBack={() => navigate('/projects')}
+        backLabel="← Back to Projects"
+        title="Project Not Found"
+        message="The project you're looking for doesn't exist."
+      />
     )
   }
 

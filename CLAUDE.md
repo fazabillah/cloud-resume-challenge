@@ -6,6 +6,43 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a **Cloud Resume Challenge** portfolio website for Faza Muhammad Billah, showcasing cloud engineering capabilities and career transition from project engineering to DevOps/Cloud Engineering. The project uses React 19 with Vite and React Router for a modern SPA (Single Page Application) architecture.
 
+## Token Management (Claude Pro)
+
+**IMPORTANT**: Before executing any task, follow this token optimization workflow:
+
+### Pre-Execution Checklist
+
+1. **Check Token Balance**
+   - Review current token usage and remaining balance
+   - Note: Claude Pro subscription has limited tokens per usage window
+   - Check next token reset time if approaching limits
+
+2. **Assess Task Complexity**
+   - Estimate token requirements based on task scope:
+     - Simple tasks (typos, single file edits): ~5-10K tokens
+     - Medium tasks (multiple file updates, refactoring): ~15-30K tokens
+     - Complex tasks (architecture changes, extensive refactoring): ~30-60K tokens
+
+3. **Select Appropriate Model**
+   - **Use Haiku for:**
+     - Simple file operations (deletions, dependency updates)
+     - Straightforward edits with clear instructions
+     - Tasks requiring speed over deep reasoning
+     - Token optimization when balance is low
+
+   - **Use Sonnet for:**
+     - React component refactoring and hook extraction
+     - Complex logic changes requiring context awareness
+     - Tasks involving multiple interdependent files
+     - When deep code understanding is critical
+
+### Token Optimization Strategies
+
+- Break large tasks into smaller sessions when token balance is limited
+- Combine independent simple tasks in one session
+- Wait for token reset between complex sessions if needed
+- Prioritize high-impact changes first (see phased approach in plans)
+
 ## Working Directory
 
 **IMPORTANT**: All npm commands must be run from the `frontend/` directory, not the project root.

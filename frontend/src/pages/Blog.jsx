@@ -1,62 +1,35 @@
-import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import SocialIcons from '../components/SocialIcons'
 import BlogCard from '../components/cards/BlogCard'
 import SearchFilterBar from '../components/common/SearchFilterBar'
 import EmptyState from '../components/common/EmptyState'
 import blogData from '../data/blogData.json'
+import useSearchAndFilter from '../hooks/useSearchAndFilter'
 
 function Blog() {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedTags, setSelectedTags] = useState([])
-
   const hasPosts = blogData.posts && blogData.posts.length > 0
 
-  // Extract available tags
-  const availableTags = useMemo(() => {
-    const tagSet = new Set()
-    blogData.posts?.forEach(post => {
-      post.tags?.forEach(tag => tagSet.add(tag))
-    })
-    return Array.from(tagSet).sort().map(tag => ({ id: tag, label: tag }))
-  }, [])
-
-  // Filter posts based on search and tags
-  const filteredPosts = useMemo(() => {
-    let filtered = blogData.posts || []
-
-    // Filter by tag
-    if (selectedTags.length > 0) {
-      filtered = filtered.filter(post =>
-        post.tags?.some(tag => selectedTags.includes(tag))
-      )
-    }
-
-    // Filter by search (case-insensitive, multi-field)
-    if (searchTerm.trim()) {
-      const searchLower = searchTerm.toLowerCase()
-      filtered = filtered.filter(post =>
-        post.title.toLowerCase().includes(searchLower) ||
-        post.excerpt?.toLowerCase().includes(searchLower) ||
-        post.tags?.some(tag => tag.toLowerCase().includes(searchLower))
-      )
-    }
-
-    return filtered
-  }, [searchTerm, selectedTags])
-
-  const handleTagToggle = (tag) => {
-    setSelectedTags(prev =>
-      prev.includes(tag)
-        ? prev.filter(t => t !== tag)
-        : [...prev, tag]
-    )
-  }
-
-  const handleClearFilters = () => {
-    setSearchTerm('')
-    setSelectedTags([])
-  }
+  // Use search and filter hook
+  const {
+    searchTerm,
+    setSearchTerm,
+    selectedFilters: selectedTags,
+    availableFilters: availableTags,
+    filteredData: filteredPosts,
+    handleFilterToggle: handleTagToggle,
+    handleClearFilters,
+  } = useSearchAndFilter(blogData.posts || [], {
+    searchFields: ['title', 'excerpt', 'tags'],
+    extractFilters: (posts) => {
+      const tagSet = new Set()
+      posts.forEach(post => {
+        post.tags?.forEach(tag => tagSet.add(tag))
+      })
+      return Array.from(tagSet).sort().map(tag => ({ id: tag, label: tag }))
+    },
+    matchFilter: (post, selectedTags) =>
+      post.tags?.some(tag => selectedTags.includes(tag))
+  })
 
   return (
     <div className="container-fluid p-0">

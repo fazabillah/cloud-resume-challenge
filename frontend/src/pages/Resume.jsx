@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import SideNav from '../components/SideNav'
 import AboutSection from '../components/sections/AboutSection'
 import SkillsSection from '../components/sections/SkillsSection'
@@ -12,16 +11,13 @@ import projectsData from '../data/projectsData.json'
 import experienceData from '../data/experienceData.json'
 import certificationsData from '../data/certificationsData.json'
 import educationData from '../data/educationData.json'
+import useBodyClass from '../hooks/useBodyClass'
 
 function Resume() {
   const navItems = resumeNavigation
 
-  useEffect(() => {
-    document.body.classList.add('has-sidebar')
-    return () => {
-      document.body.classList.remove('has-sidebar')
-    }
-  }, [])
+  // Add 'has-sidebar' class to body for layout
+  useBodyClass('has-sidebar')
 
   return (
     <>

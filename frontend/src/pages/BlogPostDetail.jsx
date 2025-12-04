@@ -4,6 +4,8 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import blogData from '../data/blogData.json'
 import BackButton from '../components/common/BackButton'
+import NotFoundSection from '../components/common/NotFoundSection'
+import useBodyClass from '../hooks/useBodyClass'
 
 function BlogPostDetail() {
   const { slug } = useParams()
@@ -11,12 +13,8 @@ function BlogPostDetail() {
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    document.body.classList.remove('has-sidebar')
-    return () => {
-      // Cleanup on unmount if needed
-    }
-  }, [])
+  // Remove 'has-sidebar' class for full-width layout
+  useBodyClass('has-sidebar', false)
 
   // Load markdown file dynamically
   useEffect(() => {
@@ -44,15 +42,12 @@ function BlogPostDetail() {
 
   if (!post) {
     return (
-      <div className="container-fluid p-0">
-        <section className="resume-section">
-          <div className="resume-section-content">
-            <BackButton onClick={() => navigate('/blog')} label="← Back to Blog" />
-            <h1>Post Not Found</h1>
-            <p>The blog post you're looking for doesn't exist.</p>
-          </div>
-        </section>
-      </div>
+      <NotFoundSection
+        onBack={() => navigate('/blog')}
+        backLabel="← Back to Blog"
+        title="Post Not Found"
+        message="The blog post you're looking for doesn't exist."
+      />
     )
   }
 
