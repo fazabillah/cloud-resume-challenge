@@ -9,8 +9,8 @@ function AboutSection({ personalInfo, aboutContent }) {
         <span className="text-primary"> {personalInfo.lastName}</span>
       </h1>
       <div className="subheading mb-5">
-        {personalInfo.location} · {personalInfo.phone} ·
-        <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+        <i className="fas fa-map-marker-alt"></i> {personalInfo.location} | <i className="fas fa-phone"></i> {personalInfo.phone} |
+        <a href={`mailto:${personalInfo.email}`}><i className="fas fa-envelope"></i> {personalInfo.email}</a>
       </div>
       <p className="lead mb-5">{aboutContent.lead}</p>
       <SocialIcons />

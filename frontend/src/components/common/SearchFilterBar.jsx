@@ -18,7 +18,6 @@ function SearchFilterBar({
     <div className="search-filter-toolbar">
       {/* Search Input */}
       <div className="search-input-wrapper">
-        <i className="fas fa-search"></i>
         <input
           type="text"
           className="form-control"

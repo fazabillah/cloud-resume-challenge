@@ -21,7 +21,7 @@
         },
         {
           "label": "Infrastructure as Code",
-          "description": "Terraform, CloudFormation, Bicep, Ansible"
+          "description": "Terraform, CloudFormation, Ansible"
         },
         {
           "label": "DevOps Tools",
@@ -29,7 +29,7 @@
         },
         {
           "label": "Programming & Scripting",
-          "description": "Python, JavaScript, React, Node.js, Bash scripting"
+          "description": "Python, JavaScript, React, Bash scripting"
         },
         {
           "label": "API Development",
@@ -54,7 +54,7 @@
         },
         {
           "label": "Project Management",
-          "description": "Scrum methodologies (PSM II certified), JIRA, MS Project"
+          "description": "Scrum Master (PSM II certified), MS Project, Jira"
         }
       ]
     }

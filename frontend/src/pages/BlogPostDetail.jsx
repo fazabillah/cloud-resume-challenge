@@ -20,7 +20,7 @@ function BlogPostDetail() {
   useEffect(() => {
     const loadMarkdown = async () => {
       try {
-        const response = await fetch(`/src/data/blog-posts/${slug}.md`)
+        const response = await fetch(`/data/blog-posts/${slug}.md`)
         if (response.ok) {
           const text = await response.text()
           setContent(text)

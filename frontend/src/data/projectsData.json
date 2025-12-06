@@ -42,7 +42,7 @@
           "architecture": "Frontend hosted on S3 with CloudFront distribution. Backend serverless Lambda with DynamoDB. API Gateway for REST endpoints.",
           "challenges": "Implementing visitor counter with DynamoDB, setting up CI/CD with GitHub Actions",
           "learnings": "Serverless architecture benefits, Infrastructure as Code best practices",
-          "githubUrl": null,
+          "githubUrl": "https://github.com/fazabillah/cloud-resume-challenge",
           "liveUrl": null,
           "images": []
         }
@@ -62,12 +62,12 @@
       "projects": [
         {
           "id": "genai-corrosion",
-          "title": "GenAI RAG Corrosion-AI",
+          "title": "Gen-AI RAG Corrosion Consultant ChatBot",
           "subtitle": "Generative AI | RAG | Machine Learning",
           "year": "2025",
           "status": "completed",
           "comingSoon": true,
-          "excerpt": "AI-powered corrosion analysis platform using Retrieval-Augmented Generation",
+          "excerpt": "AI-powered corrosion consultant chatbot App using Retrieval-Augmented Generation",
           "summary": "Developed an AI-powered corrosion analysis platform using Retrieval-Augmented Generation (RAG) architecture for intelligent document querying and technical insights.",
           "highlights": [
             {
@@ -98,7 +98,7 @@
         },
         {
           "id": "genai-contract",
-          "title": "GenAI RAG Contract Document",
+          "title": "Gen-AI RAG Contract Document Analyzer",
           "subtitle": "Generative AI | Document Analysis | NLP",
           "year": "2025",
           "status": "completed",
