@@ -15,6 +15,26 @@ Resources:
       BucketName: !Ref BucketName
       VersioningConfiguration:
         Status: Enabled
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: index.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+
+  ResumeBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref ResumeBucket
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Sub '${ResumeBucket.Arn}/*'
 
 Outputs:
   BucketName:
@@ -23,3 +43,6 @@ Outputs:
   BucketArn:
     Value: !GetAtt ResumeBucket.Arn
     Description: ARN of the S3 bucket
+  WebsiteURL:
+    Value: !GetAtt ResumeBucket.WebsiteURL
+    Description: URL of the S3 website endpoint
