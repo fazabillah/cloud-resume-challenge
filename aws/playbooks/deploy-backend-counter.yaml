@@ -1,0 +1,87 @@
+---
+- name: Deploy View Counter Backend (SAM)
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - vaults/prod.yaml
+
+  vars:
+    stack_name: cloud-resume-backend-counter
+    template_file: backend-counter.yaml
+    domain_name: fazabillah.com
+
+  tasks:
+    - name: Check if AWS SAM CLI is installed
+      ansible.builtin.command: sam --version
+      register: sam_version
+      changed_when: false
+      failed_when: false
+
+    - name: Display SAM version
+      ansible.builtin.debug:
+        msg: "{{ sam_version.stdout if sam_version.rc == 0 else 'SAM CLI not found - installing...' }}"
+
+    - name: Install AWS SAM CLI (if not installed)
+      ansible.builtin.command: brew install aws-sam-cli
+      when: sam_version.rc != 0
+
+    - name: Build SAM application
+      ansible.builtin.command:
+        cmd: sam build --template-file {{ template_file }}
+        chdir: "{{ playbook_dir }}/.."
+      environment:
+        PATH: "/usr/local/bin:/usr/local/opt/python@3.12/bin:{{ ansible_env.PATH }}"
+      register: sam_build
+      changed_when: true
+
+    - name: Display build output
+      ansible.builtin.debug:
+        msg: "{{ sam_build.stdout_lines }}"
+
+    - name: Deploy SAM application
+      ansible.builtin.command:
+        cmd: >
+          sam deploy
+          --template-file .aws-sam/build/template.yaml
+          --stack-name {{ stack_name }}
+          --region {{ aws_region }}
+          --capabilities CAPABILITY_IAM
+          --resolve-s3
+          --no-confirm-changeset
+          --no-fail-on-empty-changeset
+          --parameter-overrides DomainName={{ domain_name }}
+        chdir: "{{ playbook_dir }}/.."
+      environment:
+        PATH: "/usr/local/bin:/usr/local/opt/python@3.12/bin:{{ ansible_env.PATH }}"
+        AWS_ACCESS_KEY_ID: "{{ aws_access_key_id }}"
+        AWS_SECRET_ACCESS_KEY: "{{ aws_secret_access_key }}"
+        AWS_DEFAULT_REGION: "{{ aws_region }}"
+      register: sam_deploy
+
+    - name: Display deployment output
+      ansible.builtin.debug:
+        msg: "{{ sam_deploy.stdout_lines }}"
+
+    - name: Get stack outputs
+      amazon.aws.cloudformation_info:
+        stack_name: "{{ stack_name }}"
+        region: "{{ aws_region }}"
+        aws_access_key_id: "{{ aws_access_key_id }}"
+        aws_secret_access_key: "{{ aws_secret_access_key }}"
+      register: stack_info
+
+    - name: Display success message
+      ansible.builtin.debug:
+        msg:
+          - "=========================================="
+          - "✅ Backend Counter Deployed!"
+          - "=========================================="
+          - ""
+          - "API Endpoint: {{ stack_info.cloudformation[stack_name].stack_outputs.ApiEndpoint }}"
+          - "Lambda Function: {{ stack_info.cloudformation[stack_name].stack_outputs.FunctionArn }}"
+          - "DynamoDB Table: {{ stack_info.cloudformation[stack_name].stack_outputs.TableName }}"
+          - ""
+          - "🧪 Test the API:"
+          - "curl {{ stack_info.cloudformation[stack_name].stack_outputs.ApiEndpoint }}"

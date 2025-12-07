@@ -1,0 +1,73 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: View Counter Backend - DynamoDB + Lambda + API Gateway
+
+Parameters:
+  DomainName:
+    Type: String
+    Description: Your domain name
+    Default: fazabillah.com
+
+Resources:
+  # DynamoDB Table to store view count
+  CounterTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ViewCounter
+      BillingMode: PAY_PER_REQUEST  # On-demand pricing (no provisioned capacity)
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  # Lambda Function (Python)
+  CounterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: ViewCounterFunction
+      Runtime: python3.12
+      Handler: app.lambda_handler
+      CodeUri: src/counter/
+      MemorySize: 128
+      Timeout: 10
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref CounterTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CounterTable
+      Events:
+        GetCount:
+          Type: Api
+          Properties:
+            Path: /count
+            Method: get
+            RestApiId: !Ref CounterApi
+
+  # API Gateway
+  CounterApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      Cors:
+        AllowMethods: "'GET,OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowOrigin: !Sub "'https://${DomainName},https://www.${DomainName}'"
+        MaxAge: "'600'"
+
+Outputs:
+  ApiEndpoint:
+    Description: API Gateway endpoint URL
+    Value: !Sub 'https://${CounterApi}.execute-api.${AWS::Region}.amazonaws.com/prod/count'
+    Export:
+      Name: !Sub '${AWS::StackName}-ApiEndpoint'
+
+  FunctionArn:
+    Description: Lambda Function ARN
+    Value: !GetAtt CounterFunction.Arn
+
+  TableName:
+    Description: DynamoDB Table Name
+    Value: !Ref CounterTable
