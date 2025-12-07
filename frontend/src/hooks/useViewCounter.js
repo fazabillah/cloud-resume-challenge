@@ -22,11 +22,8 @@ export function useViewCounter() {
         setLoading(true)
         setError(null)
 
-        const response = await fetch(`${API_CONFIG.counterApiUrl}/api/counter/increment`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+        const response = await fetch(API_CONFIG.counterApiUrl, {
+          method: 'GET',
         })
 
         if (!response.ok) {
