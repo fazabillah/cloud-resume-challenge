@@ -1,6 +1,26 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  /* Typography System - DM Sans + Fira Code */
+  --font-primary: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-code: 'Fira Code', 'Courier New', monospace;
+
+  /* Font Sizes */
+  --font-size-h1: 3.25rem;
+  --font-size-h2: 2.625rem;
+  --font-size-h3: 2.0625rem;
+  --font-size-h4: 1.5rem;
+  --font-size-h5: 1.3125rem;
+  --font-size-h6: 1.125rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-sm: 0.875rem;
+  --font-size-xs: 0.75rem;
+
+  /* Line Heights */
+  --line-height-base: 1.55;
+  --line-height-heading: 1.2;
+
+  font-family: var(--font-primary);
+  line-height: var(--line-height-base);
   font-weight: 400;
 
   color-scheme: light dark;
@@ -24,15 +44,63 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-heading);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-heading);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-heading);
+  font-weight: 700;
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-heading);
+  font-weight: 700;
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  line-height: var(--line-height-heading);
+  font-weight: 700;
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+  line-height: var(--line-height-heading);
+  font-weight: 700;
+}
+
+/* Responsive heading sizes for mobile */
+@media (max-width: 575px) {
+  h1 {
+    font-size: 2.25rem;  /* Reduce from 3.25rem */
+  }
+
+  h2 {
+    font-size: 1.875rem;  /* Reduce from 2.625rem */
+  }
+
+  h3 {
+    font-size: 1.5rem;  /* Reduce from 2.0625rem */
+  }
+
+  h4 {
+    font-size: 1.25rem;  /* Reduce from 1.5rem */
+  }
 }
 
 button {
@@ -71,20 +139,22 @@ button:focus-visible {
 .markdown-content h2 {
   margin-top: 2rem;
   margin-bottom: 1rem;
-  font-weight: 600;
-  font-size: 1.75em;
+  font-weight: 700;
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-heading);
 }
 
 .markdown-content h3 {
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
-  font-weight: 600;
-  font-size: 1.35em;
+  font-weight: 700;
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-heading);
 }
 
 .markdown-content p {
   margin-bottom: 1rem;
-  line-height: 1.6;
+  line-height: var(--line-height-base);
 }
 
 .markdown-content ul,
@@ -95,7 +165,7 @@ button:focus-visible {
 
 .markdown-content li {
   margin-bottom: 0.5rem;
-  line-height: 1.6;
+  line-height: var(--line-height-base);
 }
 
 .markdown-content strong {
@@ -110,12 +180,13 @@ button:focus-visible {
   background-color: #f4f4f4;
   padding: 0.2rem 0.4rem;
   border-radius: 3px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.9em;
+  font-family: var(--font-code);
+  font-size: 0.95em;
+  color: #d6336c;
 }
 
 .markdown-content pre {
-  background-color: #f4f4f4;
+  background-color: #282c34;
   padding: 1rem;
   border-radius: 5px;
   overflow-x: auto;
@@ -126,6 +197,8 @@ button:focus-visible {
   background-color: transparent;
   padding: 0;
   border-radius: 0;
+  color: #e5e5e5;
+  font-size: 1em;
 }
 
 /* ========== SEARCH & FILTER TOOLBAR ========== */
@@ -204,6 +277,12 @@ button:focus-visible {
   }
 }
 
+@media (max-width: 575px) {
+  .search-filter-toolbar {
+    padding: 0.75rem;  /* Reduce from 1rem */
+  }
+}
+
 /* ========== EMPTY STATE ========== */
 
 .empty-state {
@@ -234,6 +313,8 @@ button:focus-visible {
   padding: 1.5rem 0;
   border-bottom: 1px solid #dee2e6;
   transition: background-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card:hover {
@@ -256,4 +337,27 @@ button:focus-visible {
 
 .project-meta {
   font-size: 0.875rem;
+}
+
+/* Mobile: year/status appears first */
+.project-meta-mobile {
+  order: 0;
+  margin-bottom: 0.5rem;
+}
+
+.project-title {
+  order: 1;
+}
+
+/* Desktop: year/status appears last */
+@media (min-width: 768px) {
+  .project-meta-mobile {
+    order: 999;
+    margin-bottom: 0;
+    margin-top: 0.75rem;
+  }
+
+  .project-title {
+    order: 0;
+  }
 }

@@ -1,14 +1,16 @@
 ---
-- name: Deploy S3 Bucket via CloudFormation
+- name: Deploy CloudFormation Stack
   hosts: localhost
   connection: local
   gather_facts: false
+
   vars_files:
     - vaults/prod.yaml
 
   vars:
     stack_name: cloud-resume-s3-stack
     bucket_name: resume-fazabillah
+    domain_name: fazabillah.com
 
   tasks:
     - name: Deploy CloudFormation stack
@@ -16,15 +18,24 @@
         stack_name: "{{ stack_name }}"
         state: present
         region: "{{ aws_region }}"
-        aws_access_key: "{{ aws_access_key_id }}"
-        aws_secret_key: "{{ aws_secret_access_key }}"
-        template: "../template.yaml"
+        template: "../frontend.yaml"
         template_parameters:
           BucketName: "{{ bucket_name }}"
-      register: cf_result
+          DomainName: "{{ domain_name }}"
+        capabilities:
+          - CAPABILITY_IAM
+        aws_access_key_id: "{{ aws_access_key_id }}"
+        aws_secret_access_key: "{{ aws_secret_access_key }}"
+      register: stack_output
 
-    - name: Display deployment result
+    - name: Display deployment results
       ansible.builtin.debug:
         msg:
-          - "===== Deployment Complete ====="
-          - "Stack Outputs: {{ cf_result.stack_outputs }}"
+          - "=========================================="
+          - "✅ Stack Deployed Successfully!"
+          - "=========================================="
+          - ""
+          - "📦 S3 Bucket: {{ stack_output.stack_outputs.BucketName }}"
+          - "🌐 CloudFront ID: {{ stack_output.stack_outputs.CloudFrontDistributionId }}"
+          - "🔗 CloudFront Domain: {{ stack_output.stack_outputs.CloudFrontDomainName }}"
+          - "🌍 Website URL: {{ stack_output.stack_outputs.WebsiteURL }}"

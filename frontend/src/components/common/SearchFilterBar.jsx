@@ -10,7 +10,7 @@ function SearchFilterBar({
   filterType = 'category',
   placeholder = 'Search...'
 }) {
-  const [isFilterExpanded, setIsFilterExpanded] = useState(false)
+  const [isFilterExpanded, setIsFilterExpanded] = useState(true)
 
   const hasActiveFilters = searchTerm || selectedFilters.length > 0
 
@@ -18,7 +18,6 @@ function SearchFilterBar({
     <div className="search-filter-toolbar">
       {/* Search Input */}
       <div className="search-input-wrapper">
-        <i className="fas fa-search"></i>
         <input
           type="text"
           className="form-control"

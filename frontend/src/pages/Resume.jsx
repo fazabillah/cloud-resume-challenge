@@ -21,7 +21,7 @@ function Resume() {
 
   return (
     <>
-      <SideNav navItems={navItems} brandText="Faza Muhammad Billah" />
+      <SideNav navItems={navItems} brandText="Faza Billah" />
 
       <div className="container-fluid p-0">
         {/* About */}
@@ -34,7 +34,7 @@ function Resume() {
         <section className="resume-section" id="skills">
           <div className="resume-section-content">
             <h2 className="mb-5">Technical Skills</h2>
-            <SkillsSection devIcons={skillsData.devIcons} skillCategories={skillsData.skillCategories} />
+            <SkillsSection skillCategories={skillsData.skillCategories} />
           </div>
         </section>
         <hr className="m-0" />

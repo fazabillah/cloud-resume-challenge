@@ -48,4 +48,6 @@ Thumbs.db
 dist/
 build/
 *.egg-info/
-aws/.aws-sam/build.toml
+
+# AWS SAM build artifacts
+.aws-sam/

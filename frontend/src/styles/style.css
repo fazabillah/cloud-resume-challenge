@@ -1,6 +1,16 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
+  font-family: var(--font-primary, 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  line-height: var(--line-height-base, 1.55);
   padding-top: 3.375rem;
   color: #6c757d;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 @media (min-width: 992px) {
@@ -18,28 +28,65 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: var(--font-primary);
   text-transform: uppercase;
+  font-weight: 700;
+  line-height: var(--line-height-heading, 1.2);
+  overflow-wrap: break-word;
 }
 
-h1 {
-  line-height: 1;
-}
+h1 { font-size: var(--font-size-h1, 3.25rem); }
+h2 { font-size: var(--font-size-h2, 2.625rem); }
+h3 { font-size: var(--font-size-h3, 2.0625rem); }
+h4 { font-size: var(--font-size-h4, 1.5rem); }
+h5 { font-size: var(--font-size-h5, 1.3125rem); }
+h6 { font-size: var(--font-size-h6, 1.125rem); }
 
 p.lead {
   font-size: 1.15rem;
   font-weight: 400;
 }
 
+p, li, div {
+  overflow-wrap: break-word;
+}
+
 .subheading {
-  font-family: "Saira Extra Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: var(--font-primary);
   text-transform: uppercase;
-  font-weight: 500;
-  font-size: 1.5rem;
+  font-weight: 600;
+  font-size: var(--font-size-h4, 1.5rem);
+  line-height: var(--line-height-heading);
+}
+
+/* Fix long URLs and text wrapping on mobile */
+.subheading a {
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+/* Contact info mobile layout */
+@media (max-width: 767px) {
+  .contact-info .contact-item {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-info .contact-separator {
+    display: none;
+  }
+}
+
+/* Ensure all long text can wrap */
+a[href^="http"],
+a[href^="https"] {
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 #sideNav .navbar-nav .nav-item .nav-link {
+  font-family: var(--font-primary);
   font-weight: 800;
-  letter-spacing: 0.05rem;
   text-transform: uppercase;
 }
 #sideNav .navbar-toggler:focus {
@@ -137,6 +184,14 @@ section.resume-section .resume-section-content {
   }
 }
 
+/* Mobile optimization - reduce horizontal padding */
+@media (max-width: 575px) {
+  section.resume-section {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
 /* Hero section styling - preserve About section prominence */
 section.resume-section:first-of-type {
   padding-top: 4rem;
@@ -167,12 +222,11 @@ section.resume-section:first-of-type {
 }
 
 #topNav .brand {
-  font-family: "Saira Extra Condensed", sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-h4, 1.5rem);
+  font-weight: 800;
   color: #fff;
   text-transform: uppercase;
-  letter-spacing: 0.05rem;
 }
 
 #topNav .brand span {
@@ -188,12 +242,12 @@ section.resume-section:first-of-type {
 }
 
 #topNav .nav-links a {
+  font-family: var(--font-primary);
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05rem;
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm, 0.875rem);
   transition: color 0.3s ease;
 }
 
@@ -277,7 +331,23 @@ body {
   }
 
   #topNav .brand {
-    font-size: 1.2rem;
+    font-size: var(--font-size-h5, 1.3125rem);
+  }
+}
+
+@media (max-width: 575px) {
+  #topNav {
+    padding: 0 0.5rem;
+  }
+
+  #topNav .nav-links {
+    padding: 1rem;  /* Reduce from 2rem to 1rem */
+  }
+}
+
+@media (max-width: 375px) {
+  #topNav .brand {
+    font-size: 1.125rem;  /* Further reduce for very small phones */
   }
 }
 
@@ -343,10 +413,10 @@ body.no-sidebar .resume-section {
 .nav-category-title {
   display: block;
   padding: 0.5rem 1rem;
-  font-weight: 700;
-  font-size: 0.85rem;
+  font-family: var(--font-primary);
+  font-weight: 800;
+  font-size: var(--font-size-sm, 0.875rem);
   text-transform: uppercase;
-  letter-spacing: 0.05rem;
   color: rgba(255, 255, 255, 0.9);
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
@@ -362,7 +432,8 @@ body.no-sidebar .resume-section {
 
 .nav-sub-item .nav-link {
   padding-left: 2rem;
-  font-size: 0.9rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm, 0.875rem);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.75);
   transition: all 0.3s ease;
@@ -375,7 +446,8 @@ body.no-sidebar .resume-section {
 
 .nav-sub-item .coming-soon-link {
   padding-left: 2rem;
-  font-size: 0.85rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm, 0.875rem);
   font-style: italic;
   color: rgba(255, 255, 255, 0.4);
   cursor: default;
@@ -429,4 +501,46 @@ body.no-sidebar .resume-section {
 .img-responsive {
   max-width: 100%;
   height: auto;
+}
+
+/* Typography Utility Classes */
+.font-primary {
+  font-family: var(--font-primary);
+}
+
+.font-code {
+  font-family: var(--font-code);
+}
+
+.fw-400 {
+  font-weight: 400;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.fw-700 {
+  font-weight: 700;
+}
+
+.fw-800 {
+  font-weight: 800;
+}
+
+.lh-base {
+  line-height: var(--line-height-base);
+}
+
+.lh-heading {
+  line-height: var(--line-height-heading);
+}
+
+.text-code {
+  font-family: var(--font-code);
+  font-size: 0.95em;
+  color: #d6336c;
+  background-color: #f4f4f4;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
 }

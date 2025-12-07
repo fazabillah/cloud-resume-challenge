@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+ansible-playbook playbooks/invalidate.yaml --ask-vault-pass

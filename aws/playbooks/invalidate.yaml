@@ -1,0 +1,48 @@
+---
+- name: Invalidate CloudFront cache
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - vaults/prod.yaml
+
+  vars:
+    stack_name: cloud-resume-s3-stack
+
+  tasks:
+    - name: Get CloudFormation stack outputs
+      amazon.aws.cloudformation_info:
+        stack_name: "{{ stack_name }}"
+        region: "{{ aws_region }}"
+        aws_access_key_id: "{{ aws_access_key_id }}"
+        aws_secret_access_key: "{{ aws_secret_access_key }}"
+      register: stack_info
+
+    - name: Extract CloudFront Distribution ID
+      ansible.builtin.set_fact:
+        distribution_id: "{{ stack_info.cloudformation[stack_name].stack_outputs.CloudFrontDistributionId }}"
+
+    - name: Invalidate CloudFront cache
+      community.aws.cloudfront_invalidation:
+        distribution_id: "{{ distribution_id }}"
+        target_paths:
+          - '/*'
+        aws_access_key_id: "{{ aws_access_key_id }}"
+        aws_secret_access_key: "{{ aws_secret_access_key }}"
+      register: invalidation
+
+    - name: Display invalidation status
+      ansible.builtin.debug:
+        msg:
+          - "=========================================="
+          - "🔄 CloudFront Cache Invalidated"
+          - "=========================================="
+          - ""
+          - "Distribution ID: {{ distribution_id }}"
+          - "Invalidation ID: {{ invalidation.invalidation.id }}"
+          - "Status: {{ invalidation.invalidation.status }}"
+          - ""
+          - "⏱️  Wait 5-15 minutes for changes to appear"
+          - "🌍 URL: https://fazabillah.com"
+          - "🌍 URL: https://www.fazabillah.com"

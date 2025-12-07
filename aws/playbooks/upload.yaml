@@ -1,0 +1,105 @@
+---
+- name: Build and upload React app to S3
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - vaults/prod.yaml
+
+  vars:
+    project_root: "{{ playbook_dir }}/../.."
+    frontend_dir: "{{ project_root }}/frontend"
+    build_dir: "{{ frontend_dir }}/dist"
+    bucket_name: "resume-fazabillah"
+
+  tasks:
+    - name: Check if Node.js is installed
+      ansible.builtin.command: node --version
+      register: node_version
+      changed_when: false
+      failed_when: node_version.rc != 0
+
+    - name: Display Node.js version
+      ansible.builtin.debug:
+        msg: "Node.js version: {{ node_version.stdout }}"
+
+    - name: Install npm dependencies
+      ansible.builtin.command:
+        cmd: npm install
+        chdir: "{{ frontend_dir }}"
+      register: npm_install
+      changed_when: "'added' in npm_install.stdout or 'updated' in npm_install.stdout"
+
+    - name: Build React application
+      ansible.builtin.command:
+        cmd: npm run build
+        chdir: "{{ frontend_dir }}"
+      register: build_output
+      changed_when: true
+
+    - name: Display build output
+      ansible.builtin.debug:
+        msg: "{{ build_output.stdout_lines }}"
+
+    - name: Verify build directory exists
+      ansible.builtin.stat:
+        path: "{{ build_dir }}"
+      register: dist_dir
+      failed_when: not dist_dir.stat.exists
+
+    - name: Sync build files to S3 bucket
+      community.aws.s3_sync:
+        bucket: "{{ bucket_name }}"
+        file_root: "{{ build_dir }}"
+        delete: true
+        aws_access_key_id: "{{ aws_access_key_id }}"
+        aws_secret_access_key: "{{ aws_secret_access_key }}"
+        region: "{{ aws_region }}"
+        mime_map:
+          .html: text/html
+          .css: text/css
+          .js: application/javascript
+          .json: application/json
+          .jpg: image/jpeg
+          .jpeg: image/jpeg
+          .png: image/png
+          .svg: image/svg+xml
+        cache_control:
+          - match: "*.html"
+            value: "public, max-age=0, must-revalidate"
+          - match: "assets/*"
+            value: "public, max-age=31536000, immutable"
+
+    - name: Get CloudFormation stack outputs
+      amazon.aws.cloudformation_info:
+        stack_name: cloud-resume-s3-stack
+        region: "{{ aws_region }}"
+        aws_access_key_id: "{{ aws_access_key_id }}"
+        aws_secret_access_key: "{{ aws_secret_access_key }}"
+      register: stack_info
+
+    - name: Extract CloudFront Distribution ID
+      ansible.builtin.set_fact:
+        distribution_id: "{{ stack_info.cloudformation['cloud-resume-s3-stack'].stack_outputs.CloudFrontDistributionId }}"
+
+    - name: Invalidate CloudFront cache
+      community.aws.cloudfront_invalidation:
+        distribution_id: "{{ distribution_id }}"
+        target_paths:
+          - '/*'
+        aws_access_key_id: "{{ aws_access_key_id }}"
+        aws_secret_access_key: "{{ aws_secret_access_key }}"
+      register: invalidation
+
+    - name: Display success
+      ansible.builtin.debug:
+        msg:
+          - "=========================================="
+          - "✅ Website Deployed!"
+          - "=========================================="
+          - ""
+          - "🌍 URL: https://fazabillah.com"
+          - "🔄 Cache invalidation ID: {{ invalidation.invalidation.id }}"
+          - ""
+          - "⏱️  Wait 5-15 minutes for changes to appear"

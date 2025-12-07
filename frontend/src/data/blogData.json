@@ -1,23 +1,13 @@
 {
   "posts": [
     {
-      "slug": "career-transition-journey",
-      "title": "My Career Transition Journey",
-      "excerpt": "Discover how I transitioned from 9+ years in project engineering to cloud and DevOps, the challenges I faced, and lessons learned along the way.",
-      "author": "Faza Muhammad Billah",
-      "publishedDate": "Nov 2025",
-      "readTime": "4 min read",
-      "tags": ["career-transition", "learning-journey", "beginners", "cloud"],
-      "coverImage": null
-    },
-    {
       "slug": "cloud-resume-challenge-walkthrough",
-      "title": "Building a Serverless Resume with the Cloud Resume Challenge",
-      "excerpt": "A comprehensive walkthrough of building a serverless resume website covering architecture, implementation, and lessons learned from the challenge.",
-      "author": "Faza Muhammad Billah",
+      "title": "Building a Multi-Cloud (AWS & Azure) Resume Portfoio ",
+      "excerpt": "A comprehensive reflection of building a serverless resume website covering architecture, implementation, and lessons learned from the challenge.",
+      "author": "Faza Billah",
       "publishedDate": "Dec 2025",
-      "readTime": "7 min read",
-      "tags": ["cloud-resume-challenge", "project-walkthrough", "aws", "serverless", "terraform"],
+      "readTime": "X min read",
+      "tags": ["Cloud Engineer"],
       "coverImage": null
     }
   ]

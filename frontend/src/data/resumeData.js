@@ -1,10 +1,10 @@
 // Personal information
 export const personalInfo = {
-  firstName: "Faza Muhammad",
+  firstName: "Faza",
   lastName: "Billah",
-  displayName: "Faza Muhammad Billah",
+  displayName: "Faza Billah",
   location: "Malaysia",
-  phone: "(+60)13-5130171",
+  phone: "+60-135130171",
   email: "fazabillah@gmail.com",
   profileImage: "/assets/images/profile.jpg"
 }
@@ -12,7 +12,7 @@ export const personalInfo = {
 // About section content
 export const aboutContent = {
   title: "About",
-  lead: "I started my career managing energy infrastructure projects where downtime cost millions. I learned to obsess over uptime, coordinate distributed teams, and automation. Somewhere between building system tools and transforming manual processes, I realized something: I wasn't just managing infrastructure, I was engineering reliability. And I wanted to do more of it. So I made the shift to cloud engineering. Now I work with AWS, Azure, Terraform, and Kubernetes to build the same resilient, automated systems I used to manage; except now they scale globally, deploy in minutes, and don't require physical offshore platforms. Currently building multi-cloud serverless architectures, writing IaC modules, and exploring how AI can improve operational efficiency. Always learning, always automating, and still allergic to manual deployments."
+  lead: "I started my career managing energy infrastructure projects where downtime cost millions. I learned to obsess over uptime, coordinate distributed teams, and automation. Somewhere between building system tools and transforming manual processes, I realized something: I wasn't just managing infrastructure, I was engineering reliability. And I wanted to do more of it. So I made the shift to DevOps/Cloud Engineering. Currently building multi-cloud deployment projects on AWS & Azure."
 }
 
 // Resume section navigation
