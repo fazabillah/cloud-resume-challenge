@@ -10,7 +10,7 @@ function SearchFilterBar({
   filterType = 'category',
   placeholder = 'Search...'
 }) {
-  const [isFilterExpanded, setIsFilterExpanded] = useState(false)
+  const [isFilterExpanded, setIsFilterExpanded] = useState(true)
 
   const hasActiveFilters = searchTerm || selectedFilters.length > 0
 

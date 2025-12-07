@@ -8,17 +8,17 @@ function ProjectCard({ project }) {
 
   return (
     <div className="project-card">
-      <h3 className="mb-2">{project.title}</h3>
+      <div className="project-meta text-muted project-meta-mobile">
+        {project.year}
+        {formatStatus(project.status) && ` • ${formatStatus(project.status)}`}
+      </div>
+      <h3 className="mb-2 project-title">{project.title}</h3>
       {project.subtitle && (
         <p className="text-muted mb-2 text-sm">
           {project.subtitle}
         </p>
       )}
       {project.excerpt && <p className="lead mb-3">{project.excerpt}</p>}
-      <div className="project-meta text-muted">
-        {project.year}
-        {formatStatus(project.status) && ` • ${formatStatus(project.status)}`}
-      </div>
     </div>
   )
 }
