@@ -2,6 +2,7 @@
 CLAUDE.md
 .claude/
 *.claude
+guide/
 
 # Teaching curriculum (personal use only)
 docs/
