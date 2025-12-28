@@ -43,6 +43,9 @@ credentials.txt
 secrets.yml
 secrets.yaml
 .env
+.env.*
+.envrc
+local.settings.json
 
 # OS files
 .DS_Store
@@ -55,3 +58,10 @@ build/
 
 # AWS SAM build artifacts
 .aws-sam/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform.lock.hcl
