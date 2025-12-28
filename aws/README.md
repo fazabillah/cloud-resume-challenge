@@ -1,41 +1,122 @@
-## Using CloudFormation (CFN)
-other options of IaC:
-- CDK
-- Terraform
+# AWS Infrastructure
 
-For this AWS, will use CFN for simplicity.
+CloudFormation + SAM templates with Ansible deployment automation.
 
-## Install Ansible
+## Architecture
 
-Full guide to [Deploy Ansible](./ANSIBLE_DEPLOYMENT_GUIDE.md)
-
-### Install pipx
 ```
-python3 -m pip install --user pipx
-python3 -m pipx ensurepath
-source ~/.zshrc
+Route 53 → CloudFront → S3 (React SPA)
+                     ↘ API Gateway → Lambda → DynamoDB
 ```
-### Install Ansible
-```
-pipx install boto3 botocore
+
+## Quick Start
+
+```bash
+# Prerequisites
 pipx install --include-deps ansible
-ansible-galaxy collection install amazon.aws
+pipx inject ansible boto3 botocore
+ansible-galaxy collection install amazon.aws community.aws
+
+# Deploy
+./bin/deploy                  # Frontend stack (S3, CloudFront, Route 53, ACM)
+./bin/deploy-backend-counter  # Backend stack (Lambda, API Gateway, DynamoDB)
+./bin/upload                  # Build React + upload to S3 + invalidate cache
 ```
 
-#### Common ansible command
-```
-ansible-playbook -i deploy.yaml --ask-vault-pass
-ansible-vault edit vaults/prod.yaml
-ansible-vault view vaults/prod.yaml
-ansible-vault rekey vaults/prod.yaml
-```
-### Ansible Deployment Fix
+## Project Structure
 
-Probably error due to isolated Python envinronment Ansible
-inject boto3 and botocore in Ansible env.
 ```
+aws/
+├── frontend.yaml             # CloudFormation: S3, CloudFront, Route 53, ACM
+├── backend-counter.yaml      # SAM: Lambda, API Gateway, DynamoDB
+├── src/
+│   └── counter/
+│       ├── app.py            # Lambda function (Python 3.12)
+│       └── requirements.txt
+├── playbooks/
+│   ├── deploy.yaml           # Frontend deployment playbook
+│   ├── deploy-backend-counter.yaml
+│   ├── upload.yaml           # S3 upload + CloudFront invalidation
+│   ├── invalidate.yaml       # CloudFront cache invalidation only
+│   └── vaults/
+│       └── prod.yaml         # Encrypted secrets (Ansible Vault)
+└── bin/
+    ├── deploy                # Deploy frontend stack
+    ├── deploy-backend-counter# Deploy backend stack
+    ├── upload                # Build + upload + invalidate
+    ├── invalidate            # Invalidate cache only
+    └── test-backend          # Test Lambda endpoint
+```
+
+## Deployment Scripts
+
+| Script | Description |
+|--------|-------------|
+| `./bin/deploy` | Deploy/update CloudFormation frontend stack |
+| `./bin/deploy-backend-counter` | Deploy SAM backend (Lambda + DynamoDB) |
+| `./bin/upload` | Build React, upload to S3, invalidate CloudFront |
+| `./bin/invalidate` | Invalidate CloudFront cache only |
+| `./bin/test-backend` | Test Lambda API endpoint |
+
+## CloudFormation Resources
+
+### frontend.yaml
+
+| Resource | Type | Description |
+|----------|------|-------------|
+| HostedZone | Route 53 | DNS zone for domain |
+| Certificate | ACM | SSL/TLS certificate |
+| ResumeBucket | S3 | Private bucket for React SPA |
+| CloudFrontOAC | CloudFront | Origin Access Control |
+| CloudFrontDistribution | CloudFront | CDN with HTTPS |
+| DNSRecord | Route 53 | A record pointing to CloudFront |
+
+### backend-counter.yaml (SAM)
+
+| Resource | Type | Description |
+|----------|------|-------------|
+| CounterTable | DynamoDB | View count storage |
+| CounterFunction | Lambda | Python function |
+| CounterApi | API Gateway | REST API with CORS |
+
+## Ansible Vault
+
+Secrets stored in `playbooks/vaults/prod.yaml`:
+
+```bash
+# Edit secrets
+ansible-vault edit playbooks/vaults/prod.yaml
+
+# View secrets
+ansible-vault view playbooks/vaults/prod.yaml
+
+# Rekey (change password)
+ansible-vault rekey playbooks/vaults/prod.yaml
+```
+
+## Troubleshooting
+
+### boto3 not found
+```bash
 pipx inject ansible boto3
 pipx inject ansible botocore
 ```
 
-Note: make sure your bucket name in deploy.yaml file is unique!
+### Certificate pending validation
+Wait for ACM DNS validation (can take 30+ minutes).
+
+### CloudFront 403 errors
+Check S3 bucket policy allows CloudFront OAC access.
+
+## Outputs
+
+After deployment, get stack outputs:
+
+```bash
+aws cloudformation describe-stacks --stack-name cloud-resume --query 'Stacks[0].Outputs'
+```
+
+Key outputs:
+- `WebsiteURL` - Your live site
+- `ApiEndpoint` - Lambda API URL
+- `CloudFrontDistributionId` - For cache invalidation

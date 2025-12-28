@@ -1,88 +1,55 @@
-# Backend Content Management System
+# Backend (Content CMS)
 
-This backend processes markdown files with YAML frontmatter and generates JSON files for the frontend.
+Python-based content management system that converts Markdown files with YAML frontmatter to JSON for the React frontend.
 
-## Setup
+## Quick Start
 
 ```bash
-cd backend
 pip install -r requirements.txt
+invoke render-all    # Render blog + projects
 ```
 
-## Usage
-
-### Render content to JSON
+## Commands
 
 ```bash
-# Render blog posts
-invoke render-blog
-
-# Render projects
-invoke render-projects
-
-# Render all content
-invoke render-all
+invoke render-blog      # Render blog posts only
+invoke render-projects  # Render projects only
+invoke render-all       # Render everything
+invoke --list           # Show all commands
 ```
 
-### Available commands
-
-```bash
-invoke --list
-```
-
-## Folder Structure
+## Project Structure
 
 ```
 backend/
 ├── data/
-│   ├── blog/           # Markdown files for blog posts
+│   ├── blog/           # Blog markdown files
 │   │   └── *.md
-│   └── projects/       # Markdown files for projects
+│   └── projects/       # Project markdown files
 │       └── *.md
 ├── lib/
 │   ├── __init__.py
-│   └── render_items.py # Markdown to JSON processor
+│   └── render_items.py # Markdown → JSON processor
 ├── tasks.py            # Invoke CLI tasks
-├── requirements.txt    # Python dependencies
-└── README.md           # This file
+└── requirements.txt
 ```
 
-## Markdown File Format
+## Data Flow
 
-### Projects
+```
+backend/data/blog/*.md     → invoke render-blog     → frontend/src/data/blogData.json
+backend/data/projects/*.md → invoke render-projects → frontend/src/data/projectsData.json
+```
+
+## Markdown Format
+
+### Blog Post
 
 ```markdown
 ---
-id: project-slug
-title: "Project Title"
-subtitle: "Short description"
-year: "2025"
-status: completed
-featured: true
-excerpt: "Brief excerpt for card display"
-technologies: "Tech1, Tech2, Tech3"
-githubUrl: "https://github.com/..."
-liveUrl: "https://..."
----
-
-## Summary
-Project summary in markdown...
-
-## Key Features
-- Feature 1
-- Feature 2
-
-## Architecture
-Architecture description...
-```
-
-### Blog Posts
-
-```markdown
----
-slug: post-slug
+slug: my-post-slug
 title: "Post Title"
-excerpt: "Brief excerpt for card display"
+excerpt: "Brief description for cards"
 author: "Author Name"
 publishedDate: "Dec 2025"
 readTime: "5 min read"
@@ -93,21 +60,62 @@ coverImage: null
 ---
 
 # Introduction
+
 Blog content in markdown...
+
+## Code Example
+
+```python
+print("Hello World")
+` ` `
 ```
 
-## Code Syntax Highlighting
+### Project
 
-The system uses Pygments for code syntax highlighting. To generate the CSS:
+```markdown
+---
+id: project-slug
+title: "Project Title"
+subtitle: "Short tagline"
+year: "2025"
+status: completed
+featured: true
+excerpt: "Brief description for cards"
+technologies: "React, AWS, Python"
+githubUrl: "https://github.com/..."
+liveUrl: "https://..."
+---
+
+## Summary
+
+Project description...
+
+## Key Features
+
+- Feature 1
+- Feature 2
+```
+
+## Code Highlighting
+
+Uses [Pygments](https://pygments.org/) with `codehilite` extension.
+
+Generate CSS theme:
 
 ```bash
-pip install Pygments
 pygmentize -S monokai -f html -a .codehilite > ../frontend/src/styles/pygments.css
 ```
 
+## Dependencies
+
+- `markdown` - Markdown to HTML
+- `pyyaml` - YAML frontmatter parsing
+- `invoke` - Task runner
+- `pygments` - Syntax highlighting
+
 ## Workflow
 
-1. Create/edit markdown files in `data/blog/` or `data/projects/`
-2. Run `invoke render-blog` or `invoke render-projects`
-3. JSON files are generated in `frontend/src/data/`
-4. Deploy frontend as usual
+1. Create/edit `.md` files in `data/blog/` or `data/projects/`
+2. Run `invoke render-all`
+3. Commit updated JSON in `frontend/src/data/`
+4. Deploy frontend

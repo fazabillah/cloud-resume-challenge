@@ -1,60 +1,74 @@
-# Cloud Resume Counter API
+# API (Local Mock)
 
-Mock Python API for the view counter feature (localhost development).
+FastAPI mock server for local development. Simulates the view counter API that runs on AWS Lambda / Azure Functions in production.
 
-## Setup
+## Quick Start
 
-1. Create virtual environment:
-   ```bash
-   cd api
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+```bash
+python3 -m venv venv
+source venv/bin/activate    # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app:app --reload --port 8000
+```
 
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+Server: http://localhost:8000
 
-3. Run the server:
-   ```bash
-   uvicorn app:app --reload --port 8000
-   ```
+## Endpoints
 
-   Server runs at: http://localhost:8000
-
-## API Endpoints
-
-- **GET /** - Health check
-- **GET /api/counter** - Get current count (no increment)
-- **POST /api/counter/increment** - Increment and return new count
-- **POST /api/counter/reset** - Reset counter to 0 (dev only)
-- **GET /docs** - Interactive API documentation (Swagger UI)
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/` | Health check |
+| GET | `/api/counter` | Get count (no increment) |
+| POST | `/api/counter/increment` | Increment and return count |
+| POST | `/api/counter/reset` | Reset to 0 (dev only) |
+| GET | `/docs` | Swagger UI |
 
 ## Testing
 
 ```bash
-# Get current count
+# Health check
+curl http://localhost:8000
+
+# Get count
 curl http://localhost:8000/api/counter
 
-# Increment counter
+# Increment
 curl -X POST http://localhost:8000/api/counter/increment
 
-# Reset counter
+# Reset
 curl -X POST http://localhost:8000/api/counter/reset
 ```
 
-## Counter Storage
+## Storage
 
-Counter persists in `counter.json` (gitignored). To reset manually:
+Counter persists in `counter.json` (gitignored).
+
+Manual reset:
 ```bash
 echo '{"count": 0}' > counter.json
 ```
 
-## Migration to AWS Lambda
+## CORS
 
-This API is designed for easy migration:
-1. Replace FastAPI with AWS Lambda handler
-2. Replace JSON file with DynamoDB table
-3. Add API Gateway integration
-4. Update CORS for production domain
+Configured for Vite dev server:
+- `http://localhost:5173`
+- `http://127.0.0.1:5173`
+
+## Production Equivalents
+
+| Local (FastAPI) | AWS | Azure |
+|-----------------|-----|-------|
+| `counter.json` | DynamoDB | CosmosDB |
+| `uvicorn` | Lambda + API Gateway | Azure Functions |
+| Manual CORS | SAM CORS config | Function CORS |
+
+## Migration Notes
+
+This mock mirrors the production API contract:
+
+```json
+// Response format
+{"count": 123}
+```
+
+AWS Lambda implementation: [aws/src/counter/app.py](../aws/src/counter/app.py)

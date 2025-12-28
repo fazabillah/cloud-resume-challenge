@@ -1,67 +1,110 @@
-# Frontend Technical Specification
+# Frontend
 
-- Create a static website that serves an HTML resume.
-- Read [React+Vite Guide](./docs/REACT_VITE_GUIDE.md) to understand how React + Vite works on my project structure
+React 19 SPA built with Vite and React Router for the Cloud Resume Challenge.
 
-## Resume Format Generation
+## Quick Start
 
-Using my existing [Cloud Engineer Resume](./docs/resume_faza_cloudengineer.pdf).
-
-Generate my Resume with GenAI to HTML Format.
-Prompt to GenAI:
-```
-Convert this Resume format to HTML.
-Please don't use a CSS framework.
-Please use the lease amount of CSS tags.
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # Production build → dist/
+npm run preview  # Preview production build
 ```
 
-Document provided to LLM:
-![](./docs/resume_faza_cloudengineer.pdf)
+## Tech Stack
 
-This is [Generated Output](./docs/20251123_resume_faza.html).
+- **React 19** - UI library
+- **Vite** - Build tool (Rolldown bundler)
+- **React Router 7** - Client-side routing
+- **Bootstrap 4.5** - CSS framework
 
-HTML and CSS using template from Using template from [startbootstrap-resume](https://github.com/StartBootstrap/startbootstrap-resume)
+## Project Structure
 
-## HTML Adjustments
-
-- UTF8, main language English.
-- Mobile styling include viewport meta tag width=device-width.
-- Stylesheet afte we satisfy with HTML markup.
-- Simplify HTML markup CSS selector to be as minimal as possible.
-- For the HTML page, use tabs 2 spaces.
-
-## Serve Static Website Locally
-
-- Purpose is so we can start using stylesheet externally from out HTML page in a Cloud Developer Environment (CDE). THis is not necessary with local development.
-
-Assuming we have node install we'll use the simple web-server http-server
-```sh
-npm i http-server -g
+```
+frontend/
+├── src/
+│   ├── main.jsx              # Entry point
+│   ├── App.jsx               # Router configuration
+│   ├── pages/                # Page components
+│   │   ├── Resume.jsx        # / - Main resume
+│   │   ├── Projects.jsx      # /projects
+│   │   ├── ProjectDetail.jsx # /projects/:id
+│   │   ├── Blog.jsx          # /blog
+│   │   └── BlogPostDetail.jsx# /blog/:slug
+│   ├── components/
+│   │   ├── sections/         # Resume sections
+│   │   ├── cards/            # Reusable cards
+│   │   ├── common/           # Shared components
+│   │   ├── SideNav.jsx       # Sidebar navigation
+│   │   ├── TopNav.jsx        # Top navigation
+│   │   └── ViewCounter.jsx   # API-connected counter
+│   ├── hooks/
+│   │   └── useViewCounter.js # View counter API hook
+│   ├── data/                 # JSON data files
+│   │   ├── blogData.json     # Generated from backend/
+│   │   └── projectsData.json # Generated from backend/
+│   ├── layouts/
+│   │   └── MainLayout.jsx    # Page wrapper
+│   ├── styles/               # CSS files
+│   └── constants/            # App constants
+├── public/                   # Static assets
+└── dist/                     # Build output
 ```
 
-https://www.npmjs.com/package/http-server
+## Routes
 
-### Server Website
+| Path | Component | Description |
+|------|-----------|-------------|
+| `/` | Resume | Main resume page |
+| `/projects` | Projects | Project portfolio |
+| `/projects/:id` | ProjectDetail | Single project |
+| `/blog` | Blog | Blog listing |
+| `/blog/:slug` | BlogPostDetail | Single post |
 
-http-server will serve public folder by default where the command is run.
+## Data Flow
 
-```sh
-cd frontend
-http-server
+```
+backend/data/*.md → invoke render-all → frontend/src/data/*.json → React components
 ```
 
-## Image Size Consideration
+Content is authored in markdown (see [backend/](../backend/)), rendered to JSON, then consumed by React.
 
-- Ensure size is small, less than 100kb
+## View Counter
 
-## Update HTML to React Vite
-- Use AI assistance to transform HTML and CSS file created previously to work in React Vite style.
+The `ViewCounter` component calls the production API (AWS/Azure) or local mock:
 
-## API ViewCounter
+```jsx
+// src/hooks/useViewCounter.js
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+```
 
-A Python FastAPI backend that tracks resume page views.
+Set `VITE_API_URL` in `.env` for production:
 
-## Frontend Framework Consideration
-1. Modern build Tooling: Vite with Rust based bundler.
-2. Serverless ready architecture: Client side SPA enabling zero-infrastructure deployment to cloud services.
-3. Maintainable config: Centralized constants and environment variables.
+```env
+VITE_API_URL=https://xxx.execute-api.region.amazonaws.com/prod/count
+```
+
+## Build & Deploy
+
+```bash
+npm run build    # Creates dist/
+```
+
+Deploy `dist/` to S3 (AWS) or Azure Storage:
+
+```bash
+# AWS
+cd ../aws && ./bin/upload
+
+# Azure
+az storage blob upload-batch -d '$web' -s dist/ --account-name <storage>
+```
+
+## Development
+
+```bash
+npm run dev      # Start dev server
+npm run lint     # ESLint check
+```
+
+Local API mock: see [api/](../api/)
