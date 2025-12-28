@@ -11,7 +11,7 @@
 
   tasks:
     - name: Build React frontend
-      command: npm run build
+      command: npm run build -- --mode azure 
       args:
         chdir: "{{ frontend_dir }}"
       register: build_result
