@@ -1,0 +1,10 @@
+#!/bin/bash
+# Configure CORS for production
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+AZURE_DIR="$SCRIPT_DIR/.."
+
+echo "Configuring CORS for fazabillah.my..."
+ansible-playbook "$AZURE_DIR/playbooks/configure-cors.yaml"

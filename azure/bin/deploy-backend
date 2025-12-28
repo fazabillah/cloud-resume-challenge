@@ -1,0 +1,27 @@
+#!/bin/bash
+# Deploy Azure Function backend
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+AZURE_DIR="$SCRIPT_DIR/.."
+
+echo "========================================"
+echo "AZURE BACKEND DEPLOY"
+echo "========================================"
+echo ""
+
+# Check Terraform state exists
+if [ ! -f "$AZURE_DIR/terraform-backend/terraform.tfstate" ]; then
+    echo "ERROR: Terraform state not found."
+    echo "Run 'terraform apply' in azure/terraform-backend first."
+    exit 1
+fi
+
+# Run deployment
+ansible-playbook "$AZURE_DIR/playbooks/deploy-function.yaml"
+
+echo ""
+echo "========================================"
+echo "DEPLOYMENT COMPLETE"
+echo "========================================"
