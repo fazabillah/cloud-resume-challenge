@@ -2,7 +2,6 @@
 CLAUDE.md
 .claude/
 *.claude
-guide/
 
 # Teaching curriculum (personal use only)
 docs/
@@ -43,6 +42,8 @@ credentials.txt
 secrets.yml
 secrets.yaml
 .env
+.env.local
+.envrc
 
 # OS files
 .DS_Store
@@ -55,3 +56,12 @@ build/
 
 # AWS SAM build artifacts
 .aws-sam/
+
+# Terraform secrets
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+terraform.tfvars
+*.auto.tfvars
+.DS_Store
