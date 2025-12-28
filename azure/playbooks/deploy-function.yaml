@@ -1,0 +1,49 @@
+---
+- name: Deploy Azure Function
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    terraform_dir: "{{ playbook_dir }}/../terraform-backend"
+    function_dir: "{{ playbook_dir }}/../function"
+
+  tasks:
+    - name: Get Function App name
+      command: terraform output -raw function_app_name
+      args:
+        chdir: "{{ terraform_dir }}"
+      register: function_app_name
+      changed_when: false
+
+    - name: Display target
+      debug:
+        msg: "Deploying to: {{ function_app_name.stdout }}"
+
+    - name: Deploy function code
+      command: func azure functionapp publish {{ function_app_name.stdout }} --python
+      args:
+        chdir: "{{ function_dir }}"
+      register: deploy_result
+
+    - name: Display result
+      debug:
+        msg: "{{ deploy_result.stdout_lines[-10:] }}"
+
+    - name: Get API endpoint
+      command: terraform output -raw function_api_endpoint
+      args:
+        chdir: "{{ terraform_dir }}"
+      register: api_endpoint
+      changed_when: false
+
+    - name: Show API URL
+      debug:
+        msg: |
+          Deployment complete!
+
+          API endpoint: {{ api_endpoint.stdout }}
+
+          Test with:
+            curl {{ api_endpoint.stdout }}
+            curl -X POST {{ api_endpoint.stdout }}

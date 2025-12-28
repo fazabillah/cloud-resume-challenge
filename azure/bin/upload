@@ -1,0 +1,32 @@
+#!/bin/bash
+# Upload React build to Azure Storage + purge Cloudflare cache
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+AZURE_DIR="$SCRIPT_DIR/.."
+
+# Load Cloudflare credentials from .envrc
+source "$AZURE_DIR/.envrc"
+
+echo "========================================"
+echo "AZURE UPLOAD: fazabillah.my"
+echo "========================================"
+echo ""
+
+# Run upload playbook
+ansible-playbook "$AZURE_DIR/playbooks/upload.yaml"
+
+# Purge cache
+echo ""
+echo "Purging Cloudflare cache..."
+ansible-playbook "$AZURE_DIR/playbooks/purge-cache.yaml"
+
+echo ""
+echo "========================================"
+echo "DEPLOYMENT COMPLETE"
+echo "========================================"
+echo ""
+echo "Visit: https://fazabillah.my"
+echo "       https://www.fazabillah.my"

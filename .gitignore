@@ -53,4 +53,5 @@ local.settings.json
 *.tfstate
 *.tfstate.*
 *.tfvars
+*.auto.tfvars
 .terraform.lock.hcl
