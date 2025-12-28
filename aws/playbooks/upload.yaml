@@ -33,7 +33,7 @@
 
     - name: Build React application
       ansible.builtin.command:
-        cmd: npm run build
+        cmd: npm run build -- --mode aws
         chdir: "{{ frontend_dir }}"
       register: build_output
       changed_when: true

@@ -1,0 +1,35 @@
+---
+- name: Upload React build to Azure Storage
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    storage_account: "resumefaza2026"
+    project_root: "{{ playbook_dir }}/../.."
+    frontend_dir: "{{ project_root }}/frontend"
+
+  tasks:
+    - name: Build React frontend
+      command: npm run build -- --mode azure 
+      args:
+        chdir: "{{ frontend_dir }}"
+      register: build_result
+
+    - name: Display build output
+      debug:
+        msg: "{{ build_result.stdout_lines[-5:] }}"
+
+    - name: Upload to Azure Storage
+      command: >
+        az storage blob upload-batch
+        --account-name {{ storage_account }}
+        --source {{ frontend_dir }}/dist
+        --destination '$web'
+        --auth-mode login
+        --overwrite
+      register: upload_result
+
+    - name: Display upload result
+      debug:
+        msg: "Upload complete! Files deployed to Azure Storage."

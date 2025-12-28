@@ -1,0 +1,40 @@
+---
+- name: Configure CORS for Production
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    terraform_dir: "{{ playbook_dir }}/../terraform-backend"
+    domains:
+      - "https://fazabillah.my"
+      - "https://www.fazabillah.my"
+
+  tasks:
+    - name: Get Function App name
+      command: terraform output -raw function_app_name
+      args:
+        chdir: "{{ terraform_dir }}"
+      register: function_app_name
+      changed_when: false
+
+    - name: Get Resource Group
+      command: terraform output -raw resource_group_name
+      args:
+        chdir: "{{ terraform_dir }}"
+      register: resource_group_name
+      changed_when: false
+
+    - name: Add CORS origins
+      command: >
+        az functionapp cors add
+        --name {{ function_app_name.stdout }}
+        --resource-group {{ resource_group_name.stdout }}
+        --allowed-origins {{ item }}
+      loop: "{{ domains }}"
+
+    - name: Show configured origins
+      debug:
+        msg: |
+          CORS configured for:
+          {{ domains | join('\n') }}
