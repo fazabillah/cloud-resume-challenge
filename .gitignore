@@ -43,6 +43,8 @@ secrets.yml
 secrets.yaml
 .env
 .env.local
+.env.aws
+.env.azure
 .envrc
 
 # OS files
@@ -65,3 +67,7 @@ build/
 terraform.tfvars
 *.auto.tfvars
 .DS_Store
+
+# Azure
+local.settings.json
+guide/
