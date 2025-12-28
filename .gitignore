@@ -1,16 +1,9 @@
-# Claude Code files
+# Claude Code
 CLAUDE.md
 .claude/
 *.claude
 guide/
-
-# Teaching curriculum (personal use only)
 docs/
-
-# AWS Ansible vault passwords (if storing locally)
-.vault_password
-.vault_pass
-*_vault_pass
 
 # Python
 __pycache__/
@@ -20,25 +13,33 @@ __pycache__/
 .Python
 venv/
 env/
-*.pyc
 
 # Node
 node_modules/
 npm-debug.log*
 yarn-debug.log*
-dist/
 *.local
 
-# IDE
+# Build
+dist/
+build/
+*.egg-info/
+.aws-sam/
+
+# IDE & OS
 .vscode/
 .idea/
 *.swp
 *.swo
 .DS_Store
+Thumbs.db
 
-# Secrets (extra safety)
+# Secrets
 *.pem
 *.key
+.vault_password
+.vault_pass
+*_vault_pass
 credentials.txt
 secrets.yml
 secrets.yaml
@@ -46,18 +47,6 @@ secrets.yaml
 .env.*
 .envrc
 local.settings.json
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Build artifacts
-dist/
-build/
-*.egg-info/
-
-# AWS SAM build artifacts
-.aws-sam/
 
 # Terraform
 .terraform/
