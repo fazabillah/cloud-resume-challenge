@@ -2,14 +2,14 @@
 
 Terraform-managed Azure infrastructure with Cloudflare CDN for the Cloud Resume Challenge.
 
+**Live**: [fazabillah.my](https://fazabillah.my)
+
 ## Architecture
 
 ```
 Cloudflare (DNS + CDN) → Azure Storage (React SPA)
                        ↘ Azure Functions → CosmosDB (View Counter)
 ```
-
-**Live**: [fazabillah.my](https://fazabillah.my)
 
 ## Quick Start
 

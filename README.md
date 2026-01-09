@@ -13,20 +13,19 @@ Full-stack serverless portfolio implementing the [Cloud Resume Challenge](https:
 
 | # | Requirement | AWS | Azure |
 |---|-------------|-----|-------|
-| 1 | Certification | AWS CCP | AZ-900 |
-| 2 | HTML Resume | React SPA | React SPA |
-| 3 | CSS Styling | Bootstrap | Bootstrap |
-| 4 | Static Website | S3 | Azure Storage |
-| 5 | HTTPS | CloudFront + ACM | Cloudflare SSL |
-| 6 | DNS | Route 53 (fazabillah.com) | Cloudflare (fazabillah.my) |
-| 7 | JavaScript | React + Vite | React + Vite |
-| 8 | Database | DynamoDB | CosmosDB |
-| 9 | API | API Gateway + Lambda | Azure Functions |
-| 10 | Python | Lambda (Python 3.12) | Azure Functions |
-| 11 | Tests | pytest | pytest |
-| 12 | Infrastructure as Code | CloudFormation + SAM | Terraform |
-| 13 | CI/CD | GitHub Actions | GitHub Actions |
-| 14 | Blog Post | - | - |
+| 1 | HTML Resume | React SPA | React SPA |
+| 2 | CSS Styling | Bootstrap | Bootstrap |
+| 3 | Static Website | S3 | Azure Storage |
+| 4 | HTTPS | CloudFront + ACM | Cloudflare SSL |
+| 5 | DNS | Route 53 (fazabillah.com) | Cloudflare (fazabillah.my) |
+| 6 | JavaScript | React + Vite | React + Vite |
+| 7 | Database | DynamoDB | CosmosDB |
+| 8 | API | API Gateway + Lambda | Azure Functions |
+| 9 | Python | Lambda (Python 3.12) | Azure Functions |
+| 10 | Tests | pytest | pytest |
+| 11 | Infrastructure as Code | CloudFormation + SAM | Terraform |
+| 12 | CI/CD | GitHub Actions | GitHub Actions |
+| 13 | Blog Post | - | - |
 
 ## Architecture
 
@@ -104,10 +103,10 @@ cd azure/terraform-frontend && terraform apply
 
 ## Cost
 
-**AWS** (Free Tier + $0.50/mo Route 53): ~$6/year
-**Azure** (Free Tier): ~$0/year
-**Domain**: ~$12/year
+- **AWS** (Free Tier + $0.50/mo Route 53): ~$6/year
+- **Azure** (Free Tier): ~$0/year
+- **Domain**: ~$12/year
 
 ---
 
-Built by [Faza Muhammad Billah](https://fazabillah.com) | Inspired by [Forrest Brazeal](https://forrestbrazeal.com)
+Built by [Faza Billah](https://fazabillah.com)
