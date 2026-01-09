@@ -45,6 +45,10 @@ azure/
 │   └── terraform.tfstate  # State file
 ├── function/              # Azure Functions code
 │   └── local.settings.json
+├── tests/
+│   ├── conftest.py           # pytest fixtures
+│   ├── test_view_counter.py  # Function unit tests
+│   └── requirements-dev.txt  # Test dependencies
 └── .envrc                 # Cloudflare env vars (direnv)
 ```
 
@@ -114,6 +118,24 @@ az storage blob upload-batch \
   --account-name <storage-account-name> \
   --overwrite
 ```
+
+## Tests
+
+```bash
+pip install -r tests/requirements-dev.txt
+pytest tests/ -v
+```
+
+## CI/CD
+
+GitHub Actions workflows in `.github/workflows/`:
+
+| Workflow | Trigger | Actions |
+|----------|---------|---------|
+| `backend-azure.yaml` | Push to `azure/function/**`, `azure/tests/**` | Run tests → Deploy Function |
+| `frontend-azure.yaml` | Push to `frontend/**`, `backend/data/**` | Build React → Azure Storage → Cloudflare purge |
+
+Required secrets: `AZURE_CREDENTIALS`, `AZURE_STORAGE_ACCOUNT`, `AZURE_FUNCTION_APP_NAME`, `AZURE_API_ENDPOINT`, `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_API_TOKEN`
 
 ## Outputs
 

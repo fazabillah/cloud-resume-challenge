@@ -23,7 +23,7 @@ Full-stack serverless portfolio implementing the [Cloud Resume Challenge](https:
 | 8 | Database | DynamoDB | CosmosDB |
 | 9 | API | API Gateway + Lambda | Azure Functions |
 | 10 | Python | Lambda (Python 3.12) | Azure Functions |
-| 11 | Tests | - | - |
+| 11 | Tests | pytest | pytest |
 | 12 | Infrastructure as Code | CloudFormation + SAM | Terraform |
 | 13 | CI/CD | GitHub Actions | GitHub Actions |
 | 14 | Blog Post | - | - |

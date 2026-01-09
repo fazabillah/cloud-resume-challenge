@@ -33,6 +33,10 @@ aws/
 │   └── counter/
 │       ├── app.py            # Lambda function (Python 3.12)
 │       └── requirements.txt
+├── tests/
+│   ├── conftest.py           # pytest fixtures
+│   ├── test_counter.py       # Lambda unit tests
+│   └── requirements-dev.txt  # Test dependencies
 ├── playbooks/
 │   ├── deploy.yaml           # Frontend deployment playbook
 │   ├── deploy-backend-counter.yaml
@@ -57,6 +61,24 @@ aws/
 | `./bin/upload` | Build React, upload to S3, invalidate CloudFront |
 | `./bin/invalidate` | Invalidate CloudFront cache only |
 | `./bin/test-backend` | Test Lambda API endpoint |
+
+## Tests
+
+```bash
+pip install -r tests/requirements-dev.txt
+pytest tests/ -v
+```
+
+## CI/CD
+
+GitHub Actions workflows in `.github/workflows/`:
+
+| Workflow | Trigger | Actions |
+|----------|---------|---------|
+| `backend-aws.yaml` | Push to `aws/src/**`, `aws/tests/**` | Run tests → SAM deploy |
+| `frontend-aws.yaml` | Push to `frontend/**`, `backend/data/**` | Build React → S3 upload → CloudFront invalidate |
+
+Required secrets: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_S3_BUCKET`, `AWS_CLOUDFRONT_ID`, `AWS_API_ENDPOINT`
 
 ## CloudFormation Resources
 
