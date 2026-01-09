@@ -1,6 +1,7 @@
 name: Azure Backend CI/CD
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'azure/function/**'

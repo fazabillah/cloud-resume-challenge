@@ -1,6 +1,7 @@
 name: AWS Backend CI/CD
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'aws/src/**'

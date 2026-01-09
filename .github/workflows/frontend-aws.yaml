@@ -1,6 +1,7 @@
 name: AWS Frontend CI/CD
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'frontend/**'
