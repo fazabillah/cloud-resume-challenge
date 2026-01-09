@@ -1,10 +1,10 @@
 {
   "inProgress": [
     {
-      "name": "Cloud Resume Challenge Bootcamp",
+      "name": "Cloud (AWS & Azure) Resume Challenge Bootcamp",
       "issuer": "ExamPro.Co",
       "icon": "fas fa-certificate text-warning",
-      "expectedDate": "Dec 2025"
+      "expectedDate": "Jan 2026"
     },
     {
       "name": "DevOps Zero to Hero",
@@ -12,12 +12,6 @@
       "icon": "fas fa-certificate text-warning",
       "expectedDate": null
       
-    },
-    {
-      "name": "Cloud Security Engineer",
-      "issuer": "TryHackMe",
-      "icon": "fas fa-certificate text-warning",
-      "expectedDate": null
     }
   ],
   "completed": [

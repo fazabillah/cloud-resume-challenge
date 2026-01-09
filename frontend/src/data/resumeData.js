@@ -12,7 +12,7 @@ export const personalInfo = {
 // About section content
 export const aboutContent = {
   title: "About",
-  lead: "I started my career managing energy infrastructure projects where downtime cost millions. I learned to obsess over uptime, coordinate distributed teams, and automation. Somewhere between building system tools and transforming manual processes, I realized something: I wasn't just managing infrastructure, I was engineering reliability. And I wanted to do more of it. So I made the shift to DevOps/Cloud Engineering. Currently building multi-cloud deployment projects on AWS & Azure."
+  lead: "I started my career managing energy infrastructure projects where downtime cost millions. I learned to obsess over uptime, coordinate distributed teams, and automation. Somewhere between building system tools and transforming manual processes, I realized something: I wasn't just managing infrastructure, I was engineering reliability. And I wanted to do more of it. So I started to learn and doing hands on project related to DevOps/Cloud Engineering."
 }
 
 // Resume section navigation

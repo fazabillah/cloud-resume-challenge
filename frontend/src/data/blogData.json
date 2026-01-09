@@ -1,20 +1,5 @@
 [
   {
-    "slug": "career-transition-journey",
-    "title": "My Career Transition Journey: From Project Engineering to Cloud Engineering",
-    "excerpt": "Sharing my experience transitioning from 9+ years in Oil & Gas project engineering to cloud engineering, including challenges faced and lessons learned.",
-    "author": "Faza Billah",
-    "publishedDate": "Dec 2025",
-    "readTime": "4 min read",
-    "tags": [
-      "Career",
-      "Cloud Engineer",
-      "Personal"
-    ],
-    "coverImage": null,
-    "body_html": "<p>Transitioning careers is challenging, but moving from project engineering to cloud engineering proved to be one of the best decisions I've made. This journey transformed my career and opened new opportunities.</p>\n<h2>Why the Transition?</h2>\n<p>After 9+ years in project engineering in the Oil &amp; Gas industry, I realized I wanted to work with cutting-edge technologies and have more flexibility. Cloud engineering offered exactly that—the chance to learn continuously, work on interesting problems, and shape my career direction.</p>\n<h3>Key Resources That Helped</h3>\n<ul>\n<li>Cloud Resume Challenge for practical project experience</li>\n<li>Online communities and forums for peer support</li>\n<li>YouTube tutorials for visualizing concepts</li>\n<li>Building personal projects to solidify learning</li>\n</ul>\n<h2>Challenges I Faced</h2>\n<p><strong>Imposter Syndrome:</strong> Comparing myself to computer science graduates was discouraging. I had to remind myself that my engineering background provided unique problem-solving skills.</p>\n<p><strong>Technical Foundation Gaps:</strong> Understanding networking, databases, and system design required foundational knowledge that I had to catch up on.</p>\n<p><strong>Competition:</strong> Entering a field with many experienced professionals was intimidating, but I focused on my unique strengths and experience.</p>\n<h2>Lessons Learned</h2>\n<ol>\n<li>Practical projects matter more than certifications alone</li>\n<li>Your domain expertise (engineering in my case) is valuable</li>\n<li>Consistency beats intensity—study a bit every day</li>\n<li>Build in public—share your projects and learning</li>\n<li>Network with others on the same journey</li>\n<li>Be patient—meaningful career transitions take time</li>\n</ol>\n<h2>Where I Am Now</h2>\n<p>Still progressing...</p>"
-  },
-  {
     "slug": "cloud-resume-challenge-walkthrough",
     "title": "Building a Multi-Cloud (AWS & Azure) Resume Portfolio",
     "excerpt": "A comprehensive reflection of building a serverless resume website covering architecture, implementation, and lessons learned from the challenge.",

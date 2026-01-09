@@ -25,11 +25,11 @@
         },
         {
           "label": "DevOps Tools",
-          "description": "Git, Docker, Kubernetes, Jenkins, CI/CD pipelines"
+          "description": "Git, Docker, Kubernetes, GitHub Action"
         },
         {
           "label": "Programming & Scripting",
-          "description": "Python, JavaScript, React, Bash scripting"
+          "description": "Python, JavaScript, React, Shell scripting"
         },
         {
           "label": "API Development",
