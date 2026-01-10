@@ -25,7 +25,6 @@ Full-stack serverless portfolio implementing the [Cloud Resume Challenge](https:
 | 10 | Tests | pytest | pytest |
 | 11 | Infrastructure as Code | CloudFormation + SAM | Terraform |
 | 12 | CI/CD | GitHub Actions | GitHub Actions |
-| 13 | Blog Post | - | - |
 
 ## Architecture
 
