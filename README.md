@@ -53,6 +53,7 @@ Full-stack serverless portfolio implementing the [Cloud Resume Challenge](https:
 
 ```
 cloud-resume-challenge/
+├── .github/           # GitHub Actions CI/CD workflows
 ├── frontend/          # React SPA (Vite + React Router)
 ├── backend/           # Content CMS (Markdown → JSON)
 ├── api/               # Local mock API (FastAPI)
@@ -86,6 +87,7 @@ cd azure/terraform-frontend && terraform apply
 | `api/` | Local FastAPI mock for development | [api/README.md](api/README.md) |
 | `aws/` | CloudFormation, SAM, Ansible playbooks | [aws/README.md](aws/README.md) |
 | `azure/` | Terraform, Azure Functions, Cloudflare | [azure/README.md](azure/README.md) |
+| `.github/` | GitHub Actions CI/CD pipelines | [.github/README.md](.github/README.md) |
 
 ## Tech Stack
 
