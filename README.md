@@ -87,7 +87,7 @@ cd azure/terraform-frontend && terraform apply
 | `api/` | Local FastAPI mock for development | [api/README.md](api/README.md) |
 | `aws/` | CloudFormation, SAM, Ansible playbooks | [aws/README.md](aws/README.md) |
 | `azure/` | Terraform, Azure Functions, Cloudflare | [azure/README.md](azure/README.md) |
-| `.github/` | GitHub Actions CI/CD pipelines | [.github/README.md](.github/README.md) |
+| `.github/` | GitHub Actions CI/CD pipelines | [.github/WORKFLOWS.md](.github/WORKFLOWS.md) |
 
 ## Tech Stack
 
