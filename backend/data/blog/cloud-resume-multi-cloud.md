@@ -72,12 +72,12 @@ Connecting everything together is **GitHub Actions**, which serves as the single
 
 ## 5. Final Thoughts: Was Building Two Clouds Worth It?
 
-So, was tackling two cloud platforms from a standing start worth the extra effort? Absolutely. The Multi-Cloud approach was an incredible learning experience. Instead of just learning *how* to do something on AWS, I was forced to understand *why* I was doing it, as I had to immediately translate that concept to its Azure equivalent. It solidifies core cloud principles far more effectively than sticking to a single ecosystem.
+The Multi-Cloud approach was an incredible learning experience for me. Instead of just learning *how* to do something on AWS, I was forced to understand *why* I was doing it, as I had to immediately translate that concept to its Azure equivalent. It solidifies core cloud principles far more effectively than sticking to a single ecosystem.
 
 The single most important lesson from this comparative build is that while the service names and implementation details differ, the fundamental architectural patterns; DNS, CDN, serverless compute, NoSQL databases are universal. Learning them this way provides a robust, provider-agnostic understanding of modern cloud infrastructure.
 
-It's challenging, but the clarity you gain is invaluable. And from a practical standpoint, it's affordable. Here is the final annual cost breakdown for the project:
+It's challenging, but the clarity I gain is invaluable. And from a practical standpoint, it's affordable. Here is the estimate annual cost breakdown for the project:
 
 - **AWS Cost:** ~$6/year (due to the $0.50/mo for a Route 53 hosted zone)
-- **Azure Cost:** ~$5/year (leveraging the free tier)
+- **Azure Cost:** ~$5/year
 - **Domain:** ~$12/year
