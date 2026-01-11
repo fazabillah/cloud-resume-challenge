@@ -105,7 +105,7 @@ cd azure/terraform-frontend && terraform apply
 ## Cost
 
 - **AWS** (Free Tier + $0.50/mo Route 53): ~$6/year
-- **Azure** (Free Tier): ~$0/year
+- **Azure** (Free Tier): ~$5/year
 - **Domain**: ~$12/year
 
 ---
