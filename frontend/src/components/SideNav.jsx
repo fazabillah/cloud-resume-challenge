@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { DOM_IDS } from '../constants/domIds'
 import { UI_TEXT } from '../constants/text'
 
@@ -91,7 +92,7 @@ function SideNav({ profileImage = '/assets/images/profile.jpg', brandText, navIt
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id={DOM_IDS.sideNav}>
-      <a className="navbar-brand js-scroll-trigger" href={`#${DOM_IDS.pageTop}`}>
+      <Link className="navbar-brand" to="/">
         <span className="d-block d-lg-none">{brandText || UI_TEXT.brand.fullName}</span>
         {showProfile && (
           <span className="d-none d-lg-block">
@@ -102,7 +103,7 @@ function SideNav({ profileImage = '/assets/images/profile.jpg', brandText, navIt
             />
           </span>
         )}
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"

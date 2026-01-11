@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { DOM_IDS } from '../constants/domIds'
 import { UI_TEXT } from '../constants/text'
 
@@ -16,9 +16,9 @@ function TopNav() {
 
   return (
     <nav id={DOM_IDS.topNav}>
-      <div className="brand">
+      <Link to="/" className="brand">
         {UI_TEXT.brand.firstName} <span>{UI_TEXT.brand.lastName}</span>
-      </div>
+      </Link>
       <ul className={`nav-links ${mobileMenuOpen ? 'active' : ''}`} id={DOM_IDS.topNavLinks}>
         <li>
           <NavLink
