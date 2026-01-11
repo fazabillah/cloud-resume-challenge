@@ -13,31 +13,35 @@
   ],
   "skillCategories": [
     {
-      "title": "Cloud & DevOps (In Progress)",
+      "title": "Cloud Engineer / DevOps",
       "skills": [
         {
           "label": "Cloud Platforms",
-          "description": "AWS (S3, CloudFront, Lambda, API Gateway, DynamoDB, Route 53, ACM), Azure (Storage, Functions, Cosmos DB, Front Door)"
+          "description": "AWS, Azure"
         },
         {
-          "label": "Infrastructure as Code",
+          "label": "Infrastructure as Code (IaC)",
           "description": "Terraform, CloudFormation, Ansible"
         },
         {
-          "label": "DevOps Tools",
-          "description": "Git, Docker, Kubernetes, GitHub Action"
+          "label": "Containerization & Orchestration",
+          "description": "Docker, Kubernetes"
+        },
+        {
+          "label": "CICD",
+          "description": "Git, GitHub Action"
+        },
+        {
+          "label": "Monitoring & Logging",
+          "description": "Prometheus, Grafana"
         },
         {
           "label": "Programming & Scripting",
-          "description": "Python, JavaScript, React, Shell scripting"
+          "description": "Python, JavaScript, React, Linux Shell scripting"
         },
         {
           "label": "API Development",
           "description": "RESTful APIs, Serverless architectures, FastAPI, LangServe"
-        },
-        {
-          "label": "Monitoring & Logging",
-          "description": "CloudWatch, Azure Monitor"
         }
       ]
     },
