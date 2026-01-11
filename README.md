@@ -79,7 +79,7 @@ See each subdirectory README for more detail on specific choices.
 
 ## What I learned
 
-The IaC journey was the hardest part. Started with CloudFormation for AWS, then added SAM for Lambda stuff. For Azure I used Terraform because ARM templates felt like JSON hell.
+The IaC journey was the hardest part. Started with CloudFormation for AWS, then added SAM for Lambda stuff. For Azure I used Terraform for simplicity and learning of using Terraform.
 
 Ansible came in when I needed to manage secrets and orchestrate deploys. Could've used bash scripts but Ansible Vault solved the credentials problem cleanly.
 
@@ -88,8 +88,6 @@ Main takeaways:
 - Terraform is cleaner syntax, better for multi-cloud, but you manage state files
 - SAM is just CloudFormation with Lambda shortcuts. Don't overthink it
 - Ansible fills a different gap than Terraform. Use both together
-
-For the full walkthrough see [guide/ANSIBLE_DEPLOYMENT_GUIDE.md](guide/ANSIBLE_DEPLOYMENT_GUIDE.md).
 
 ## Project structure
 

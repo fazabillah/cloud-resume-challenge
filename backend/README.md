@@ -15,7 +15,7 @@ The tradeoff is no rich editor or live preview. But I write in VS Code anyway so
 
 ## Why Python Invoke
 
-Invoke is a simple task runner. Like Make but Python.
+Invoke is a simple task runner.
 
 Considered alternatives:
 - **Make** - works but Makefiles are ugly and I already use Python

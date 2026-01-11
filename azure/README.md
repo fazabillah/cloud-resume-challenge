@@ -36,7 +36,7 @@ Cloudflare proxies everything. Static files (2a) from Azure Storage, API calls (
 
 ## Why Terraform (not ARM templates)
 
-ARM templates are JSON hell. Looked at them, closed the tab. Terraform with HCL is so much cleaner.
+ARM templates are JSON hell. Terraform with HCL is so much cleaner.
 
 Benefits over ARM:
 - **Readable syntax** - HCL looks like actual config, not serialized data
@@ -55,7 +55,7 @@ Azure has its own CDN. Went with Cloudflare instead because:
 - **Better DX** - dashboard is cleaner, cache purge is faster, no Azure portal clicking
 - **Proxied DNS** - hides origin, adds WAF features for free
 
-Azure CDN would work fine. But Cloudflare was simpler since I already had the domain there.
+Azure CDN would work fine. But Cloudflare was simpler.
 
 ## Prerequisites
 
