@@ -36,7 +36,7 @@ def render_items(folder):
         metadata = yaml.safe_load(front_matter)
         metadata["body_html"] = markdown.markdown(
             body,
-            extensions=["fenced_code", "codehilite"]
+            extensions=["fenced_code", "codehilite", "tables"]
         )
         items.append(metadata)
 

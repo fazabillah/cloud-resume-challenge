@@ -201,6 +201,41 @@ button:focus-visible {
   font-size: 1em;
 }
 
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+  border: 1px solid #444;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.markdown-content th {
+  background-color: #333;
+  font-weight: 600;
+}
+
+.markdown-content tr:hover {
+  background-color: #2a2a2a;
+}
+
+@media (prefers-color-scheme: light) {
+  .markdown-content th,
+  .markdown-content td {
+    border-color: #ddd;
+  }
+  .markdown-content th {
+    background-color: #f5f5f5;
+  }
+  .markdown-content tr:hover {
+    background-color: #f9f9f9;
+  }
+}
+
 /* ========== SEARCH & FILTER TOOLBAR ========== */
 
 .search-filter-toolbar {
